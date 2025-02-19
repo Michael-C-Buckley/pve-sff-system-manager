@@ -15,10 +15,7 @@
     sffConfig = {host}: system-manager.lib.makeSystemConfig {
       modules = [
         ./base.nix
-        {custom.sff = {
-          current = host;
-          members = sffMembers;
-        };}
+        ./hosts/${host}
       ];
     };
   in {
