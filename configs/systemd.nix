@@ -18,9 +18,4 @@ _: {
       };
     };
   };
-  
-  networking = {
-    # Hosts File
-    hosts = {};
-  };
 }
