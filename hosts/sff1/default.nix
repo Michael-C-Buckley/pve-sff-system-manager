@@ -1,6 +1,6 @@
-_: {
+{config, ...}: {
   custom = {
-    sff.current = "sff1";
+    sff.current = config.custom.sff1;
 
     sff1 = {
       vmbr0.ipv4 = "192.168.48.21/24";
