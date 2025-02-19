@@ -11,6 +11,9 @@
   # Generate and adds these to the custom option set
   sffOptions = genAttrs sffNames (name: {
     lo.ipv4 = stringOption "IPv4 loopback address to add to ${name}'s lo";
+    vmbr0.ipv4 = stringOption "IPv4 address to add to ${name}'s default bridge";
+    enx520p1.ipv4 = "IPv4 address to add to ${name}'s Intel X520 port 1";
+    gateway.ipv4 = stringOption "IPv4 default gateway address";
   });
 in {
   # Common options that are evaluated as the member who ran the flake
