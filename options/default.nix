@@ -1,4 +1,5 @@
-{lib, ...}: let 
+{lib, ...}: let
+  inherit (lib) mkOption types;
   sffNames = [ "sff1" "sff2" "sff3" ];
 in {
   imports = [
