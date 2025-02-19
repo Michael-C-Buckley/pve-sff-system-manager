@@ -1,8 +1,9 @@
-{config, ...}: {
-
+{config, ...}: let
+  sff = config.custom.${config.custom.sff.current};
+in {
   environment.etc."systemd/network/10-enx520p1".text = ''
     [Match]
-    MACAddress=${config.custom.sff.current.enx520p1.macAddress}
+    MACAddress=${sff.enx520p1.macAddress}
 
     [Link]
     Name=enx520p1
@@ -11,7 +12,7 @@
 
   environment.etc."systemd/network/12-enx520p2".text = ''
     [Match]
-    MACAddress=${config.custom.sff.current.enx520p2.macAddress}
+    MACAddress=${sff.enx520p2.macAddress}
 
     [Link]
     Name=enx520p2

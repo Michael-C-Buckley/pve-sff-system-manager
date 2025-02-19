@@ -1,8 +1,10 @@
-{config, ...}: {
+{config, ...}: let
+  sff = config.custom.${config.custom.sff.current};
+in {
   environment.etc."network/interfaces".text = ''
     auto lo
     iface lo inet loopback
-      address ${config.custom.sff.current.lo.ipv4}
+      address ${sff.lo.ipv4}
       address ${config.custom.sff.anycast.ipv4}
       post-up iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-ports 8006
       post-up iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8006
@@ -15,8 +17,8 @@
 
     auto vmbr0
     iface vmbr0 inet static
-      address ${config.custom.sff.current.vmbr0.ipv4}
-      gateway ${config.custom.sff.current.vmbr0.gateway.ipv4}
+      address ${sff.vmbr0.ipv4}
+      gateway ${sff.vmbr0.gateway.ipv4}
       bridge-ports eno1
       bridge-stp off
       bridge-fd 0
@@ -30,7 +32,7 @@
 
     auto enx520p1
     iface enx520p1 inet static
-      address ${config.custom.sff.current.enx520p1.ipv4}
+      address ${sff.enx520p1.ipv4}
 
     iface enx520p2 inet manual
 

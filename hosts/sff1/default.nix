@@ -1,8 +1,7 @@
-{config, ...}: {
+_: {
   custom = {
-    sff.current = config.custom.sff1;
-
     sff1 = {
+      lo.ipv4 = "192.168.61.5";
       vmbr0.ipv4 = "192.168.48.21/24";
       gateway.ipv4 = "192.168.48.1";
       enx520p1 = {

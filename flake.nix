@@ -15,7 +15,7 @@
     sffConfig = {host}: system-manager.lib.makeSystemConfig {
       modules = [
         ./base.nix
-        ./hosts/${host}
+        {custom.sff.current = host;}
       ];
     };
   in {
