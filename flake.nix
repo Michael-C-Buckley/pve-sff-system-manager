@@ -10,10 +10,21 @@
     };
   };
 
-  outputs = { self, flake-utils, nixpkgs, system-manager }: {
-    # To do: split out per host config
-    systemConfigs.default = system-manager.lib.makeSystemConfig {
-      modules = [./base.nix];
+  outputs = { nixpkgs, system-manager }: let
+    sffMembers = [ "sff1" "sff2" "sff3" ];
+    sffConfig = {host}: system-manager.lib.makeSystemConfig {
+      modules = [
+        ./base.nix
+        {custom.sff = {
+          current = host;
+          members = sffMembers;
+        };}
+      ];
     };
+  in {
+    systemConfigs = builtins.listToAttrs (map (host: {
+      name = host;
+      value = sffConfig {inherit host}
+    }) sffMembers);
   };
 }
