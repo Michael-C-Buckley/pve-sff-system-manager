@@ -1,4 +1,4 @@
-_: {
+{pkgs, ...}: {
   imports = [
     # ./frr.nix
     ./network-interfaces.nix
@@ -12,5 +12,9 @@ _: {
     sff1.lo.ipv4 = "192.168.61.5";
     sff2.lo.ipv4 = "192.168.61.6";
     sff3.lo.ipv4 = "192.168.61.7";
-  }
+  };
+
+  environment.systemPackages = with pkgs; [
+    frr
+  ]
 }
