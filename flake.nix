@@ -11,9 +11,11 @@
   };
 
   outputs = { self, flake-utils, nixpkgs, system-manager }: {
+    # To do: split out per host config
     systemConfigs.default = system-manager.lib.makeSystemConfig {
       modules = [
-        ./systemd
+        ./configs
+        ./options
       ];
     };
   };

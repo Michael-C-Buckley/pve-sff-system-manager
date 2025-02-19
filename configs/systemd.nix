@@ -1,6 +1,7 @@
 _: {
   systemd.network = {
     links = {
+      # Rename the Intel X520-DA2 cards
       "10-ente1" = {
         matchConfig.MACaddress = "";
         linkConfig = {
@@ -16,5 +17,10 @@ _: {
         };
       };
     };
+  };
+  
+  networking = {
+    # Hosts File
+    hosts = {};
   };
 }
