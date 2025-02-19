@@ -24,7 +24,7 @@
   in {
     systemConfigs = builtins.listToAttrs (map (host: {
       name = host;
-      value = sffConfig {inherit host}
+      value = sffConfig {inherit host;};
     }) sffMembers);
   };
 }
