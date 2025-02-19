@@ -10,7 +10,7 @@
     };
   };
 
-  outputs = { nixpkgs, system-manager }: let
+  outputs = { self, nixpkgs, system-manager }: let
     sffMembers = [ "sff1" "sff2" "sff3" ];
     sffConfig = {host}: system-manager.lib.makeSystemConfig {
       modules = [
