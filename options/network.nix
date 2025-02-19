@@ -7,7 +7,7 @@
   };
 
   # Generate and adds these to the custom option set
-  sffOptions = genAttrs ["sff1" "sff2" "sff3"](name: {
+  sffOptions = genAttrs ["sff1" "sff2" "sff3"] (name: {
     lo.ipv4 = stringOption "IPv4 loopback address to add to ${name}'s lo";
     vmbr0.ipv4 = stringOption "IPv4 address to add to ${name}'s default bridge";
     gateway.ipv4 = stringOption "IPv4 default gateway address";
