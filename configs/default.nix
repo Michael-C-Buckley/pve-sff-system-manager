@@ -2,6 +2,6 @@
   imports = [
     # ./frr.nix
     ./network-interfaces.nix
-    ./systemd.nix
+    ./systemd-links.nix
   ];
 }
