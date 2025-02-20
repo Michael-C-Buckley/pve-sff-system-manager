@@ -1,6 +1,6 @@
 _: {
   imports = [
-    ./frr.nix
+    # ./frr.nix
     ./network-interfaces.nix
     ./systemd-links.nix
   ];
