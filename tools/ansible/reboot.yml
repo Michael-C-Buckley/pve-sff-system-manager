@@ -1,0 +1,8 @@
+- name: Shutdown SFF Hosts
+  hosts: sff_hosts_as_root
+  tasks:
+    - name: Reboot servers (10 second delay)
+      ansible.builtin.reboot:
+        pre_reboot_delay: 10
+        msg: "ALERT: The system is rebooting in 10 seconds."
+      ignore_unreachable: true

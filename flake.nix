@@ -29,14 +29,13 @@
       shellHook = let 
         inv = "-i tools/ansible/inventory.ini";
         playbook = "ansible-playbook ${inv} tools/ansible/";
-        rootcmd = "ansible sff_hosts_as_root ${inv} -m command -a ";
       in ''
         ${nix-devshells.devShells.x86_64-linux.nixos.shellHook or ""}
         # Ansible Shortcuts
-        alias hms='${playbook}home-manager.yml'
-        alias sms='${playbook}system-manager.yml'
-        alias sffreboot='${rootcmd} "reboot"'
-        alias sffpoweroff='${rootcmd} "shutdown now"'
+        alias sffh='${playbook}home-manager.yml'
+        alias sffs='${playbook}system-manager.yml'
+        alias sffreboot='${playbook}reboot.yml'
+        alias sffpoweroff='${playbook}shutdown.yml'
       '';
     };
     systemConfigs = builtins.listToAttrs (map (host: {
