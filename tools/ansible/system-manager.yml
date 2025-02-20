@@ -1,0 +1,40 @@
+---
+- name: Update system-manager configs
+  hosts: sff_hosts_as_root
+  tasks:
+    - name: Check Project Directory
+      ansible.builtin.stat:
+        path: "{{ ansible_env.HOME }}/system-manager/"
+      register: dir_status
+
+    - name: Check Repo
+      ansible.builtin.stat:
+        path: "{{ ansible_env.HOME }}/system-manager/.git"
+      register: git_status
+      when: dir_status.stat.exists and dir_status.stat.isdir
+
+    - name: Clone Project
+      ansible.builtin.git:
+        repo: "https://github.com/Michael-C-Buckley/pve-sff-system-manager.git"
+        dest: "{{ ansible_env.HOME }}/system-manager/"
+        clone: yes
+      when: not dir_status.stat.exists or not git_status.stat.exists
+      register: git_clone
+
+    - name: Get Updates
+      ansible.builtin.git:
+        repo: "https://github.com/Michael-C-Buckley/pve-sff-system-manager.git"
+        dest: "{{ ansible_env.HOME }}/system-manager/"
+        update: yes
+        force: yes
+      when: git_status.stat.exists
+
+    - name: Perform the update
+      ansible.builtin.shell: |
+        source /etc/profile
+        source $HOME/.nix-profile/etc/profile.d/nix.sh || true
+        system-manager switch --flake /root/system-manager
+      args:
+        executable: /bin/bash
+      become: false
+      when: git_clone.changed or git_status.stat.exists

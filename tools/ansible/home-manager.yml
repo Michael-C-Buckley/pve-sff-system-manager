@@ -1,0 +1,41 @@
+---
+- name: Update home-manager configs
+  hosts: sff_hosts
+  become: false
+  tasks:
+    - name: Check Project Directory
+      ansible.builtin.stat:
+        path: "{{ ansible_env.HOME }}/.config/home-manager/"
+      register: dir_status
+
+    - name: Check Repo
+      ansible.builtin.stat:
+        path: "{{ ansible_env.HOME }}/.config/home-manager/.git"
+      register: git_status
+      when: dir_status.stat.exists and dir_status.stat.isdir
+
+    - name: Clone Project
+      ansible.builtin.git:
+        repo: "https://github.com/Michael-C-Buckley/home-config.git"
+        dest: "{{ ansible_env.HOME }}/.config/home-manager/"
+        clone: yes
+      when: not dir_status.stat.exists or not git_status.stat.exists
+      register: git_clone
+
+    - name: Get Updates
+      ansible.builtin.git:
+        repo: "https://github.com/Michael-C-Buckley/home-config.git"
+        dest: "{{ ansible_env.HOME }}/.config/home-manager/"
+        update: yes
+        force: yes
+      when: git_status.stat.exists
+    
+    - name: Perform the update
+      ansible.builtin.shell: |
+        source /etc/profile
+        source $HOME/.nix-profile/etc/profile.d/nix.sh || true
+        home-manager switch
+      args:
+        executable: /bin/bash
+      become: false
+      when: git_clone.changed or git_status.stat.exists
