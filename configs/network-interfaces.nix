@@ -18,7 +18,7 @@ in {
     auto vmbr0
     iface vmbr0 inet static
       address ${sff.vmbr0.ipv4}
-      gateway ${sff.gateway.ipv4}
+      gateway ${config.custom.sff.gateway.ipv4}
       bridge-ports eno1
       bridge-stp off
       bridge-fd 0

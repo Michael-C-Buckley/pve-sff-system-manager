@@ -10,7 +10,6 @@
   sffOptions = genAttrs ["sff1" "sff2" "sff3"] (name: {
     lo.ipv4 = stringOption "IPv4 loopback address to add to ${name}'s lo";
     vmbr0.ipv4 = stringOption "IPv4 address to add to ${name}'s default bridge";
-    gateway.ipv4 = stringOption "IPv4 default gateway address";
 
     # To do: de-duplicate
     enx520p1 = {
@@ -27,6 +26,7 @@ in {
   options.custom = sffOptions // {
     sff = {
       anycast.ipv4 = stringOption "The cluster's IPv4 anycast address";
+      gateway.ipv4 = stringOption "IPv4 default gateway address";
     };
   };
 }
