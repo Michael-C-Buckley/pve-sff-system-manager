@@ -95,11 +95,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1740049008,
-        "narHash": "sha256-jNpq/agMkF/a/aoe15i+3otVUywuzz0NpYR4MQYYQn0=",
+        "lastModified": 1740051318,
+        "narHash": "sha256-37k4eaZeYr3gitzq41fPhHOtAHYkSvgV5dFEsKsizCM=",
         "owner": "Michael-C-Buckley",
         "repo": "nix-devshells",
-        "rev": "b60dca1170256e604c7e8b83da6c468b308da094",
+        "rev": "198bbb50ec3ba67358de36a142ceab1f2bf37157",
         "type": "github"
       },
       "original": {
