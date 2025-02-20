@@ -8,9 +8,14 @@
       url = "github:numtide/system-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-devshells = {
+      url = "github:Michael-C-Buckley/nix-devshells";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, system-manager }: let
+  outputs = { system-manager, nix-devshells }: let
     sffMembers = [ "sff1" "sff2" "sff3" ];
     sffConfig = {host}: system-manager.lib.makeSystemConfig {
       modules = [
@@ -19,6 +24,7 @@
       ];
     };
   in {
+    devShells.x86_64-linux.default = nix-devshells.devShells.x86_64-linux.nixosServers;
     systemConfigs = builtins.listToAttrs (map (host: {
       name = host;
       value = sffConfig {inherit host;};
