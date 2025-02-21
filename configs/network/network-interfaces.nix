@@ -33,6 +33,7 @@ in {
     auto enx520p1
     iface enx520p1 inet static
       address ${sff.enx520p1.ipv4}
+      mtu 9000
 
     iface enx520p2 inet manual
 

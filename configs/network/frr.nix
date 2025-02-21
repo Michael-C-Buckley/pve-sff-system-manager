@@ -19,7 +19,7 @@ in {
     int lo
       ip ospf area 0
       ip ospf passive
-    int eno1
+    int vmbr0
       ip ospf cost 400
       ${ospfCommon} 
     int enx520p1
