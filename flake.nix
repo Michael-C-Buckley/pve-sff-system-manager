@@ -2,7 +2,7 @@
   description = "A very basic flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.11-small";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable-small";
 
     system-manager = {
       url = "github:numtide/system-manager";
